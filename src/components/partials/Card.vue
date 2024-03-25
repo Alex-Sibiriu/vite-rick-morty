@@ -18,11 +18,12 @@
 
 <template>
 
-  <div class="col">
-    <div class="card">
+  <div class="col pb-3">
+    <div class="my-card text-center rounded-3 overflow-hidden h-100"
+        :class="`bg-${species}`">
       <img :src="image" class="card-img-top" :alt="name">
-      <div class="card-body">
-        <h5 class="character-title">{{ name }}</h5>
+      <div class="card-body fw-bold">
+        <h3 class="character-title p-3">{{ name }}</h3>
         <p class="character-status">Status: {{ status }}</p>
         <p class="character-species">Specie: {{ species }}</p>
       </div>
@@ -33,5 +34,26 @@
 
 <style lang="scss" scoped>
   
+  .my-card {
+    cursor: pointer;
+    border: 10px solid gold;
+    box-shadow: 1px 1px 4px black;
+    transition: .3s all;
+    &:hover {
+      scale: 1.2;
+      box-shadow: 3px 3px 6px black;
+    }
+    img {
+      border-bottom: 5px solid gold;
+    }
+  }
 
+  .bg{
+    &-Human {
+      background-color: lightblue;
+    }
+    &-Alien {
+      background-color: lightgreen;
+    }
+  }
 </style>

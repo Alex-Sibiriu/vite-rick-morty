@@ -32,10 +32,21 @@
 </script>
 
 <template>
-  <Main />
+
+  <body class="pb-5">
+
+    <Header />
+    <Main />
+
+  </body>
+    
 </template>
 
 <style lang="scss" scoped>
-  @import './assets/scss/main.scss';
+
+  body {
+    background-color: peachpuff;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
 
 </style>

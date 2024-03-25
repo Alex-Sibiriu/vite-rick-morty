@@ -15,22 +15,24 @@
 </script>
 
 <template>
-  <div class="container">
-    <div class="row row-cols-4">
-
-      <Card 
-        v-for="character in this.store.characters" :key="character.id"
+  <main>
+    <div class="container">
+      <div class="row row-cols-4">
+        
+        <Card 
+        v-for="character in this.store.characters"
+        :key="character.id"
         :image="character.image"
         :name="character.name"
         :status="character.status"
         :species="character.species"
-      />
-
+        />
+        
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
-  @import '../assets/scss/main.scss'
 
 </style>
