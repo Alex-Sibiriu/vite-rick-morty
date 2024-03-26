@@ -12,27 +12,53 @@
     data() {
       return {
         store,
+        pageCounter: 0,
       }
     },
     methods: {
       getApi() {
         this.store.characters = [];
         this.store.errorString = '';
-        
-        console.log(this.store.apiParam);
+
         axios.get(this.store.apiUrl, {
           params: this.store.apiParam
         })
         .then(result => {
-          this.store.characters = result.data.results
+          this.store.characters = result.data.results;
         })
         .catch(error => {
           this.store.errorString = 'Nessun Personaggio Trovato'
         })
-      }
+      },
+
+      getSpecies() {
+        for (let i = 0; i < this.store.pagesNum; i++) {
+         
+          axios.get(this.store.apiUrl, {
+            params: {
+              page: this.pageCounter++,
+            }
+          })
+          .then(result => {
+            result.data.results.forEach(character => {
+              if (!this.store.allSpecies.includes(character.species)) {
+                this.store.allSpecies.push(character.species)
+              }
+              if (!this.store.allStatus.includes(character.status)) {
+                this.store.allStatus.push(character.status)
+              }
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          })
+        }
+      } 
     },
+
     mounted() {
-      this.getApi()
+      this.getApi(),
+      this.getSpecies()
     },
   }
 </script>
@@ -40,7 +66,9 @@
 <template>
 
     <Header 
-      @searchChars="getApi" />
+      @searchChars="getApi" 
+    />
+
     <Main />
     
 </template>
