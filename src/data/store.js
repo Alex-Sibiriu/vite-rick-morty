@@ -10,5 +10,7 @@ export const store = reactive({
   apiParam: {
     name: '',
     species: '',
+    status: '',
+    page: 0,
   }
 });

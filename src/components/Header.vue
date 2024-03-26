@@ -10,6 +10,20 @@
     methods: {
       selectSpecies() {
         this.store.apiParam.species = document.getElementById('select-species').value
+      },
+
+      selectStatus() {
+        this.store.apiParam.status = document.getElementById('select-status').value
+      },
+
+      resetPage() {
+        this.store.apiParam.page = 0;
+      },
+
+      resetValues() {
+        this.store.apiParam.name = '';
+        this.store.apiParam.species = '';
+        this.store.apiParam.status = '';
       }
     },
   }
@@ -28,16 +42,25 @@
         class="rounded-2 w-25 p-2">
 
       <select name="select-species" id="select-species" class="rounded-2 mx-4 p-2 w-25 p-2 bg-success">
-        <option value="" class="">All Species</option>
+        <option value="">All Species</option>
         <option
           v-for="(species, index) in store.allSpecies"
-          :key="'s' + index"
+          :key="'sp' + index"
           :value="species"
           class="border-bottom border-dark">{{ species }}</option>
       </select>
 
-      <span @click="selectSpecies(), $emit('searchChars')"  class="btn btn-warning">Search</span>
-      <span class="btn btn-danger ms-3 ">Reset</span>
+      <select name="select-status" id="select-status" class="rounded-2 me-4 p-2 w-25 p-2 bg-success">
+        <option value="">All Status</option>
+        <option
+          v-for="(status, index) in store.allStatus"
+          :key="'st' + index"
+          :value="status"
+          class="border-bottom border-dark">{{ status }}</option>
+      </select>
+
+      <span @click="selectSpecies(), selectStatus(), resetPage(), $emit('searchChars')" class="btn btn-warning">Search</span>
+      <span @click="resetValues(), $emit('searchChars')" class="btn btn-danger ms-3 ">Reset</span>
 
     </div>
   </header>

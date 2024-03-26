@@ -2,12 +2,14 @@
   import axios from 'axios';  
   import { store } from './data/store.js';
   import Header from './components/Header.vue';
-  import Main from './components/Main.vue'
+  import Main from './components/Main.vue';
+  import Paginator from './components/partials/Paginator.vue'
 
   export default {
     components: {
       Header,
       Main,
+      Paginator,
     },
     data() {
       return {
@@ -25,6 +27,7 @@
         })
         .then(result => {
           this.store.characters = result.data.results;
+          this.store.pagesNum = result.data.info.pages;
         })
         .catch(error => {
           this.store.errorString = 'Nessun Personaggio Trovato'
@@ -67,6 +70,10 @@
 
     <Header 
       @searchChars="getApi" 
+    />
+
+    <Paginator 
+      @searchChars="getApi"
     />
 
     <Main />
