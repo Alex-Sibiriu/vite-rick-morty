@@ -19,7 +19,7 @@
 <template>
 
   <div class="col pb-3">
-    <div class="my-card text-center rounded-3 overflow-hidden h-100"
+    <div class="my-card bg-info text-center rounded-3 overflow-hidden h-100"
         :class="`bg-${species}`">
       <img :src="image" class="card-img-top" :alt="name">
       <div class="card-body fw-bold">

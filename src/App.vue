@@ -16,12 +16,18 @@
     },
     methods: {
       getApi() {
-        axios.get(this.store.apiUrl)
+        this.store.characters = [];
+        this.store.errorString = '';
+        
+        console.log(this.store.apiParam);
+        axios.get(this.store.apiUrl, {
+          params: this.store.apiParam
+        })
         .then(result => {
           this.store.characters = result.data.results
         })
         .catch(error => {
-          console.log(error);
+          this.store.errorString = 'Nessun Personaggio Trovato'
         })
       }
     },
@@ -33,20 +39,20 @@
 
 <template>
 
-  <body class="pb-5">
-
-    <Header />
+    <Header 
+      @searchChars="getApi" />
     <Main />
-
-  </body>
     
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
   body {
-    background-color: peachpuff;
+    background-image: url('./assets/img/rick-and-morty.jpg');
+    background-size: cover;
+    background-attachment: fixed;
     font-family: 'Trebuchet MS', sans-serif;
+    padding-bottom: 30px;
   }
 
 </style>
