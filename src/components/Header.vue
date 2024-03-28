@@ -17,7 +17,7 @@
       },
 
       resetPage() {
-        this.store.apiParam.page = 0;
+        this.store.apiParam.page = 1;
       },
 
       resetValues() {
@@ -31,11 +31,11 @@
 
 <template>
   <header>
-    <div class="container text-center pb-5">
+    <div class="container text-center mb-5">
 
       <h1 class="m-0 fw-bold py-5">Rick & Morty</h1>
       <input
-        v-model="store.apiParam.name"
+        v-model.trim="store.apiParam.name"
         @keyup.enter="$emit('searchChars')"
         type="text"
         placeholder="Search Character"
@@ -60,7 +60,7 @@
       </select>
 
       <span @click="selectSpecies(), selectStatus(), resetPage(), $emit('searchChars')" class="btn btn-warning">Search</span>
-      <span @click="resetValues(), $emit('searchChars')" class="btn btn-danger ms-3 ">Reset</span>
+      <span @click="resetValues(), resetPage(), $emit('searchChars')" class="btn btn-danger ms-3 ">Reset</span>
 
     </div>
   </header>

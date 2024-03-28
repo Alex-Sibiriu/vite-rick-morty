@@ -21,22 +21,27 @@
       getApi() {
         this.store.characters = [];
         this.store.errorString = '';
+        this.store.errorString = '';
 
         axios.get(this.store.apiUrl, {
           params: this.store.apiParam
         })
         .then(result => {
+          this.store.pagesNum = result.data.info.pages;
           this.store.characters = result.data.results;
           this.store.pagesNum = result.data.info.pages;
+          this.store.apiParam.name = '';
+          if (this.store.allSpecies.length === 0) {
+            this.getProps();
+          }
         })
         .catch(error => {
           this.store.errorString = 'Nessun Personaggio Trovato'
         })
       },
 
-      getSpecies() {
+      getProps() {
         for (let i = 0; i < this.store.pagesNum; i++) {
-         
           axios.get(this.store.apiUrl, {
             params: {
               page: this.pageCounter++,
@@ -60,8 +65,7 @@
     },
 
     mounted() {
-      this.getApi(),
-      this.getSpecies()
+      this.getApi()
     },
   }
 </script>
@@ -73,10 +77,16 @@
     />
 
     <Paginator 
+      v-if="store.characters.length > 0"
       @searchChars="getApi"
     />
 
     <Main />
+
+    <Paginator 
+    v-if="store.characters.length > 0"
+      @searchChars="getApi"
+    />
     
 </template>
 
